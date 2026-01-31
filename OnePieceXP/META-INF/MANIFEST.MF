@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: OnePiece XP Mod
+Main-Class: com.onepiece.xp.OnePieceXPMod
