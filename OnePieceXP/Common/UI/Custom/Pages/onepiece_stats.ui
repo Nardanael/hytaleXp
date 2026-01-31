@@ -1,0 +1,177 @@
+$C = "../Common.ui";
+
+// Styles
+@CloseButtonStyle = TextButtonStyle(
+  Default: (Background: #34495e, LabelStyle: (FontSize: 14, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Hovered: (Background: #2c3e50, LabelStyle: (FontSize: 14, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Pressed: (Background: #2c3e50, LabelStyle: (FontSize: 14, TextColor: #95a5a6, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center))
+);
+
+@AllocateButtonStyle = TextButtonStyle(
+  Default: (Background: #27ae60, LabelStyle: (FontSize: 12, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Hovered: (Background: #2ecc71, LabelStyle: (FontSize: 12, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Pressed: (Background: #1e8449, LabelStyle: (FontSize: 12, TextColor: #cccccc, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center))
+);
+
+Group {
+  Anchor: (Width: 600, Height: 650);
+  LayoutMode: Top;
+  Background: #141c26(0.98);
+  Padding: (Full: 20);
+
+  // === EN-TÊTE ===
+  Label #TitleLabel {
+    Text: "STATISTIQUES ONE PIECE";
+    Anchor: (Height: 45);
+    Style: (FontSize: 26, TextColor: #f1c40f, HorizontalAlignment: Center, RenderBold: true);
+  }
+  
+  Group { Anchor: (Height: 1); Background: #2b3542; }
+  Group { Anchor: (Height: 15); }
+
+  // === INFORMATIONS NIVEAU & ZONE ===
+  Group {
+    LayoutMode: Top;
+    Anchor: (Height: 80);
+    
+    Group {
+      LayoutMode: Left;
+      Anchor: (Height: 28);
+      Label { Text: "Niveau:"; Anchor: (Width: 120); Style: (FontSize: 16, TextColor: #3498db, VerticalAlignment: Center); }
+      Label #LevelDisplay { Text: "0/60"; Anchor: (Width: 100); Style: (FontSize: 16, TextColor: #ffffff, RenderBold: true, VerticalAlignment: Center); }
+      Label #ZoneDisplay { Text: "(East Blue)"; Style: (FontSize: 14, TextColor: #e74c3c, VerticalAlignment: Center); }
+    }
+    
+    Group { Anchor: (Height: 8); }
+    
+    Group {
+      LayoutMode: Left;
+      Anchor: (Height: 22);
+      Label { Text: "Points disponibles:"; Anchor: (Width: 200); Style: (FontSize: 14, TextColor: #f39c12, VerticalAlignment: Center); }
+      Label #FreePoints { Text: "0"; Style: (FontSize: 14, TextColor: #2ecc71, RenderBold: true, VerticalAlignment: Center); }
+    }
+    
+    Group { Anchor: (Height: 8); }
+    
+    Group {
+      LayoutMode: Left;
+      Anchor: (Height: 22);
+      Label { Text: "Stats totales:"; Anchor: (Width: 200); Style: (FontSize: 14, TextColor: #95a5a6, VerticalAlignment: Center); }
+      Label #TotalStats { Text: "0/1000"; Style: (FontSize: 14, TextColor: #ffffff, VerticalAlignment: Center); }
+    }
+  }
+
+  Group { Anchor: (Height: 1); Background: #2b3542(0.5); }
+  Group { Anchor: (Height: 15); }
+
+  // === STATISTIQUES ===
+  
+  // ❤️ VITALITÉ
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 40);
+    
+    Label { Text: "❤️ Vitalité:"; Anchor: (Width: 140); Style: (FontSize: 16, TextColor: #e74c3c, VerticalAlignment: Center, RenderBold: true); }
+    Label #VitalityValue { Text: "0/200"; Anchor: (Width: 80); Style: (FontSize: 15, TextColor: #ffffff, VerticalAlignment: Center); }
+    Label #VitalityEffect { Text: "(100 PV)"; Anchor: (Width: 120); Style: (FontSize: 13, TextColor: #95a5a6, VerticalAlignment: Center); }
+    Group { FlexWeight: 1; }
+    TextButton #AllocateVitality { Text: "+ Allouer"; Anchor: (Width: 100, Height: 32); Style: @AllocateButtonStyle; }
+  }
+  
+  Group { Anchor: (Height: 8); }
+
+  // 🛡️ RÉSISTANCE  
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 40);
+    
+    Label { Text: "🛡️ Résistance:"; Anchor: (Width: 140); Style: (FontSize: 16, TextColor: #3498db, VerticalAlignment: Center, RenderBold: true); }
+    Label #ResistanceValue { Text: "0/200"; Anchor: (Width: 80); Style: (FontSize: 15, TextColor: #ffffff, VerticalAlignment: Center); }
+    Label #ResistanceEffect { Text: "(0.0% def)"; Anchor: (Width: 120); Style: (FontSize: 13, TextColor: #95a5a6, VerticalAlignment: Center); }
+    Group { FlexWeight: 1; }
+    TextButton #AllocateResistance { Text: "+ Allouer"; Anchor: (Width: 100, Height: 32); Style: @AllocateButtonStyle; }
+  }
+  
+  Group { Anchor: (Height: 8); }
+
+  // ⚔️ ATTAQUE
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 40);
+    
+    Label { Text: "⚔️ Attaque:"; Anchor: (Width: 140); Style: (FontSize: 16, TextColor: #e67e22, VerticalAlignment: Center, RenderBold: true); }
+    Label #AttackValue { Text: "0/200"; Anchor: (Width: 80); Style: (FontSize: 15, TextColor: #ffffff, VerticalAlignment: Center); }
+    Label #AttackEffect { Text: "(0% dmg)"; Anchor: (Width: 120); Style: (FontSize: 13, TextColor: #95a5a6, VerticalAlignment: Center); }
+    Group { FlexWeight: 1; }
+    TextButton #AllocateAttack { Text: "+ Allouer"; Anchor: (Width: 100, Height: 32); Style: @AllocateButtonStyle; }
+  }
+  
+  Group { Anchor: (Height: 8); }
+
+  // ⚡ STAMINA
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 40);
+    
+    Label { Text: "⚡ Stamina:"; Anchor: (Width: 140); Style: (FontSize: 16, TextColor: #f1c40f, VerticalAlignment: Center, RenderBold: true); }
+    Label #StaminaValue { Text: "0/200"; Anchor: (Width: 80); Style: (FontSize: 15, TextColor: #ffffff, VerticalAlignment: Center); }
+    Label #StaminaEffect { Text: "(0 stamina)"; Anchor: (Width: 120); Style: (FontSize: 13, TextColor: #95a5a6, VerticalAlignment: Center); }
+    Group { FlexWeight: 1; }
+    TextButton #AllocateStamina { Text: "+ Allouer"; Anchor: (Width: 100, Height: 32); Style: @AllocateButtonStyle; }
+  }
+  
+  Group { Anchor: (Height: 8); }
+
+  // 🌀 HAKI
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 40);
+    
+    Label { Text: "🌀 Haki:"; Anchor: (Width: 140); Style: (FontSize: 16, TextColor: #9b59b6, VerticalAlignment: Center, RenderBold: true); }
+    Label #HakiValue { Text: "0/200"; Anchor: (Width: 80); Style: (FontSize: 15, TextColor: #ffffff, VerticalAlignment: Center); }
+    Label #HakiEffect { Text: "(0 haki)"; Anchor: (Width: 120); Style: (FontSize: 13, TextColor: #95a5a6, VerticalAlignment: Center); }
+    Group { FlexWeight: 1; }
+    TextButton #AllocateHaki { Text: "+ Allouer"; Anchor: (Width: 100, Height: 32); Style: @AllocateButtonStyle; }
+  }
+  
+  Group { Anchor: (Height: 8); }
+
+  // 🫧 RESPIRATION (Non améliorable)
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 40);
+    
+    Label { Text: "🫧 Respiration:"; Anchor: (Width: 140); Style: (FontSize: 16, TextColor: #1abc9c, VerticalAlignment: Center, RenderBold: true); }
+    Label #RespirationValue { Text: "0/60"; Anchor: (Width: 80); Style: (FontSize: 15, TextColor: #ffffff, VerticalAlignment: Center); }
+    Label #RespirationEffect { Text: "(0 sec)"; Anchor: (Width: 120); Style: (FontSize: 13, TextColor: #95a5a6, VerticalAlignment: Center); }
+    Group { FlexWeight: 1; }
+    Label { Text: "-Non améliorable-"; Anchor: (Width: 120); Style: (FontSize: 11, TextColor: #7f8c8d, VerticalAlignment: Center, HorizontalAlignment: Center); }
+  }
+
+  Group { Anchor: (Height: 1); Background: #2b3542(0.5); }
+  Group { Anchor: (Height: 12); }
+
+  // === STATS BONUS ===
+  Group {
+    LayoutMode: Left;
+    Anchor: (Height: 24);
+    Label { Text: "Stats bonus (Endgame):"; Anchor: (Width: 220); Style: (FontSize: 14, TextColor: #f39c12, VerticalAlignment: Center); }
+    Label #BonusStats { Text: "0/400"; Style: (FontSize: 14, TextColor: #2ecc71, VerticalAlignment: Center); }
+  }
+
+  Group { FlexWeight: 1; }
+  Group { Anchor: (Height: 1); Background: #2b3542(0.5); }
+  Group { Anchor: (Height: 16); }
+
+  // === BOUTONS ===
+  Group {
+    LayoutMode: Center;
+    Anchor: (Height: 44);
+    
+    TextButton #CloseButton {
+      Text: "FERMER";
+      Anchor: (Width: 120, Height: 40);
+      Style: @CloseButtonStyle;
+    }
+  }
+}

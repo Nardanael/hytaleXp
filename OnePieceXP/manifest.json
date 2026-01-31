@@ -1,0 +1,7 @@
+{
+  "Group": "OnePiece",
+  "Name": "OnePieceXPMod",
+  "Version": "1.0.0",
+  "Main": "com.onepiece.xp.OnePieceXPMod",
+  "IncludesAssetPack": true
+}
