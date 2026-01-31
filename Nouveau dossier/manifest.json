@@ -1,0 +1,7 @@
+{
+  "Group": "VKCraft",
+  "Name": "VKCraftPlugin",
+  "Version": "2.1.0",
+  "Main": "com.viktor.vkcrafthytale.VKCraftMod",
+  "IncludesAssetPack": true
+}
