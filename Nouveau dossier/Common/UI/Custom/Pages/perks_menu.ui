@@ -1,0 +1,159 @@
+$C = "../Common.ui";
+
+// --- STYLY (Zachovány z původního perks_menu) ---
+@TabButtonStyle = TextButtonStyle(
+  Default: (Background: #34495e, LabelStyle: (FontSize: 16, TextColor: #bdc3c7, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Hovered: (Background: #2c3e50, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Pressed: (Background: #2ecc71, LabelStyle: (FontSize: 16, TextColor: #141c26, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center))
+);
+
+@ActivePerkStyle = TextButtonStyle(
+  Default: (Background: #f39c12, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Hovered: (Background: #f1c40f, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Pressed: (Background: #d35400, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center))
+);
+
+@CloseButtonStyle = TextButtonStyle(
+  Default: (Background: #c0392b, LabelStyle: (FontSize: 14, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Hovered: (Background: #e74c3c, LabelStyle: (FontSize: 14, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Pressed: (Background: #a93226, LabelStyle: (FontSize: 14, TextColor: #cccccc, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center))
+);
+
+// --- HLAVNÍ OKNO ---
+Group {
+  Anchor: (Width: 850, Height: 500);
+  LayoutMode: Center; 
+  Background: #141c26(0.98); // Stejné pozadí jako stats_profile
+  Padding: (Full: 20);      // Zvětšeno na 20 podle stats_profile
+
+  // Obalovací Group pro dvousloupcový layout (zabrání skákání)
+  Group {
+    LayoutMode: Left;
+    FlexWeight: 1;
+
+    // === LEVÝ SLOUPEC (MENU) ===
+    Group {
+      Anchor: (Width: 170); 
+      LayoutMode: Top;
+      
+      // Nadpis MENU (Styl podle stats_profile TitleLabel)
+      Label #skillsTitle {
+        Text: "SKILLS";
+        Anchor: (Height: 45);
+        Style: (FontSize: 24, TextColor: #f1c40f, RenderBold: true, HorizontalAlignment: Center);
+      }
+
+      // Oddělovací čára (Styl podle stats_profile)
+      Group { Anchor: (Height: 1); Background: #2b3542; }
+      Group { Anchor: (Height: 20); }
+      
+      // Tlačítka
+      TextButton #tabMining { Text: "MINING"; Anchor: (Height: 40, Width: 160); Style: @TabButtonStyle; }
+      Group { Anchor: (Height: 10); } // Jednotné mezery
+      
+      TextButton #tabCombat { Text: "COMBAT"; Anchor: (Height: 40, Width: 160); Style: @TabButtonStyle; }
+      Group { Anchor: (Height: 10); }
+      
+      TextButton #tabWood { Text: "WOODCUT"; Anchor: (Height: 40, Width: 160); Style: @TabButtonStyle; }
+      Group { Anchor: (Height: 10); }
+      
+      TextButton #tabFarm { Text: "FARMING"; Anchor: (Height: 40, Width: 160); Style: @TabButtonStyle; }
+      Group { Anchor: (Height: 10); }
+      
+      TextButton #tabMagic { Text: "MAGIC"; Anchor: (Height: 40, Width: 160); Style: @TabButtonStyle; }
+
+      Group { FlexWeight: 1; } // Pružná mezera
+
+      // Close Button
+      TextButton #closeButton {
+        Text: "CLOSE";
+        Anchor: (Height: 40, Width: 160);
+        Style: @CloseButtonStyle;
+      }
+    }
+
+    // Mezera mezi sloupci
+    Group { Anchor: (Width: 20); }
+
+    // === PRAVÝ SLOUPEC (OBSAH) ===
+    Group {
+      FlexWeight: 1; 
+      LayoutMode: Top;
+
+      // Hlavička obsahu (Upraveno do stylu stats_profile)
+      Label #pageTitle {
+        Text: "CONFIGURATION";
+        Anchor: (Height: 45);
+        Style: (FontSize: 24, TextColor: #f1c40f, RenderBold: true, HorizontalAlignment: Center);
+      }
+      
+      // Oddělovací čára (Styl podle stats_profile)
+      Group { Anchor: (Height: 1); Background: #2b3542; }
+      
+      // Podnadpis
+      Group {
+        LayoutMode: Top;
+        Padding: (Top: 10, Bottom: 10);
+        Label #pageSubtitle {
+          Text: "System Ready";
+          Anchor: (Height: 25);
+          Style: (FontSize: 16, TextColor: #95a5a6, HorizontalAlignment: Center);
+        }
+      }
+
+      // --- SEZNAM LEVELŮ ---
+      Group #tierListGroup {
+        LayoutMode: Top;
+        FlexWeight: 1;
+        
+        TextButton #btnTier5  { Text: "LEVEL 5";  Anchor: (Height: 50); Style: @TabButtonStyle; }
+        Group { Anchor: (Height: 10); }
+        
+        TextButton #btnTier10 { Text: "LEVEL 10"; Anchor: (Height: 50); Style: @TabButtonStyle; }
+        Group { Anchor: (Height: 10); }
+
+        TextButton #btnTier15 { Text: "LEVEL 15"; Anchor: (Height: 50); Style: @TabButtonStyle; }
+      }
+
+      // --- VÝBĚR PERKU ---
+      Group #selectionGroup {
+        LayoutMode: Top;
+        FlexWeight: 1;
+        Visible: false;
+
+        Label #choosePerkTitle {
+            Text: "CHOOSE PERK PROTOCOL:";
+            Anchor: (Height: 30);
+            Style: (FontSize: 16, TextColor: #f1c40f, HorizontalAlignment: Center);
+        }
+        Group { Anchor: (Height: 10); }
+        
+        // Option A
+        TextButton #btnOptionA { Text: "OPTION A"; Anchor: (Height: 60); Style: @ActivePerkStyle; }
+        Label #descOptionA {
+          Text: "...";
+          Anchor: (Height: 40);
+          Style: (FontSize: 14, TextColor: #bdc3c7, HorizontalAlignment: Center);
+        }
+        
+        Group { Anchor: (Height: 15); }
+
+        // Option B
+        TextButton #btnOptionB { Text: "OPTION B"; Anchor: (Height: 60); Style: @ActivePerkStyle; }
+        Label #descOptionB {
+          Text: "...";
+          Anchor: (Height: 40);
+          Style: (FontSize: 14, TextColor: #bdc3c7, HorizontalAlignment: Center);
+        }
+
+        Group { FlexWeight: 1; }
+        
+        // Tlačítko zpět
+        Group {
+            LayoutMode: Center;
+            TextButton #btnBack { Text: "RETURN"; Anchor: (Height: 40, Width: 150); Style: @TabButtonStyle; }
+        }
+      }
+    }
+  }
+}
